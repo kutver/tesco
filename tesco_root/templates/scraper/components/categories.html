@@ -1,0 +1,7 @@
+<ul class="nav flex-column">
+    {% for category in categories %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'details' category=category.url second_category=None third_category=None page=1 %}">{{category.title}}</a>
+    </li>
+    {% endfor %}
+</ul>

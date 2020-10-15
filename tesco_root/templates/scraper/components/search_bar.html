@@ -1,0 +1,7 @@
+<form method="POST" action="{% url 'search-by-url' %}">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Tesco URL" value="{{ url }}" name="url" aria-label="Tesco URL">
+        {% csrf_token %}
+        <input class="btn btn-outline-secondary" type="submit" id="button-addon2" value="&#128270;">
+    </div>
+</form> 

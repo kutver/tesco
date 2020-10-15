@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Tesco Web Scraper{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="col-3">
+        {% include "scraper/components/categories.html" %}
+    </div>
+    <div class="col-9">
+
+        <div class="row justify-content-between mt-2">
+            <div class="col">
+                <ul class="pagination">
+                    <li class="page-item{% if page == 1 %} disabled{% endif %}"><a class="page-link" href="{% url 'details' category=category second_category=second_category third_category=third_category page=page|add:-1 %}">&laquo; Page {{page|add:-1}}</a></li>
+                    <li class="page-item"><a class="page-link" href="{% url 'details' category=category second_category=second_category third_category=third_category page=page|add:1 %}">Page {{page|add:1}} &raquo;</a></li>
+                </ul>
+            </div>
+            <div class="col">
+                <a class="btn btn-primary float-right" href="{% url 'export' category=category second_category=second_category third_category=third_category page=page %}" target="_blank"role="button">Export this page as CSV</a>
+            </div>
+          </div>
+          
+
+        <div class="row">
+            <table class="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Price per Unit</th>
+                    <th scope="col">Price per Quantity</th>
+                    <th scope="col">Currency</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for product in products %}
+                  <tr>
+                    <td><a href="{{product.url}}" target="_blank">{{product.title}}</a></td>
+                    <td>{{product.price_unit}}</td>
+                    <td>{{product.price_quantity}}{{product.weight}}</td>
+                    <td>{{product.currency}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>    
+        </div>
+    
+    </div>
+</div>
+{% endblock content %}
